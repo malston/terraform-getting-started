@@ -1,11 +1,11 @@
 provider "aws" {
     access_key = "${var.access_key}"
     secret_key = "${var.secret_key}"
-    region = "us-east-1"
+    region = "${var.region}"
 }
 
 resource "aws_instance" "example" {
-    ami = "ami-aa7ab6c2"
+    ami = "${lookup(var.amis, var.region)}"
     instance_type = "t1.micro"
 
     provisioner "local-exec" {
